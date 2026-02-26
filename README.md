@@ -4,7 +4,7 @@
 
 ## Live Dashboard
 
-**[Live Dashboard](https://gsuchecki40.github.io/napoleon-battle-analytics/)**
+**[Live Dashboard](https://gsuchecki40.github.io/Napoleon-Battle-Analytics/)**
 
 Interactive dashboard with animated general comparisons, cluster breakdowns, and Monte Carlo head-to-head matchups. Worth clicking.
 
