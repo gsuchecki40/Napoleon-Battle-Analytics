@@ -1,4 +1,4 @@
-# napoleon-battle-analytics
+# Napoleon Battle Analytics
 
 > Clustering 660 battles across 400 years of warfare to quantify military genius — Napoleon, Wellington, Frederick the Great, and more.
 
