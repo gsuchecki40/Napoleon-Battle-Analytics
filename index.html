@@ -7,23 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold:        #E8C060;
-    --gold-dim:    #A07820;
-    --gold-bright: #FFD980;
+    --gold:        #C9A84C;
+    --gold-dim:    #8B6914;
+    --gold-bright: #E8C060;
     --red:         #8B1A1A;
-    --red-bright:  #E04040;
-    --blue:        #5B8DB8;
-    --blue-bright: #7BAFDC;
-    --cream:       #F5EDD8;
-    --ink:         #0A0804;
-    --ink-mid:     #161208;
-    --ink-light:   #221C10;
-    --steel:       #556070;
+    --red-bright:  #C0392B;
+    --cream:       #F2E8D5;
+    --ink:         #0E0B07;
+    --ink-mid:     #1A1510;
+    --ink-light:   #2A2218;
+    --steel:       #4A5568;
     --steel-bright:#7A8FA8;
-    --text-dim:    #9A8B72;
+    --text-dim:    #8B7D6B;
     --text-mid:    #C4B090;
-    --border:      rgba(232,192,96,0.25);
-    --border-bright:rgba(232,192,96,0.5);
+    --border:      rgba(201,168,76,0.2);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -93,9 +90,23 @@
     margin-top: 16px;
     font-size: 18px;
     font-style: italic;
-    color: var(--text-mid);
+    color: var(--text-dim);
     letter-spacing: 0.5px;
   }
+
+  .napoleon-quote {
+    margin-top: 28px;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(15px, 1.8vw, 20px);
+    font-style: normal;
+    font-weight: 400;
+    color: #E8C060;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    text-shadow: 0 0 40px rgba(232,192,96,0.3);
+  }
+
+  .napoleon-quote::after { content: '— Napoleon Bonaparte'; display: block; font-size: 9px; font-family: 'JetBrains Mono', monospace; letter-spacing: 3px; color: var(--text-dim); margin-top: 10px; text-transform: uppercase; }
 
   /* ── Section titles ── */
   .section-title {
@@ -129,24 +140,21 @@
   .stat-card {
     background: var(--ink-mid);
     border: 1px solid var(--border);
-    padding: 32px 24px;
+    padding: 40px 28px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color 0.3s;
   }
 
-  .stat-card:hover {
-    border-color: var(--gold);
-    box-shadow: 0 0 30px rgba(232,192,96,0.1), inset 0 0 30px rgba(232,192,96,0.03);
-  }
+  .stat-card:hover { border-color: var(--gold); }
 
   .stat-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -154,27 +162,39 @@
 
   .stat-value {
     font-family: 'Cinzel', serif;
-    font-size: 48px;
+    font-size: 52px;
     font-weight: 700;
-    color: var(--gold-bright);
+    color: var(--gold);
     line-height: 1;
-    margin-bottom: 8px;
-    text-shadow: 0 0 40px rgba(232,192,96,0.4);
+    margin-bottom: 10px;
   }
 
   .stat-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-mid);
+    color: var(--text-dim);
   }
 
   .stat-context {
-    font-size: 13px;
+    font-size: 14px;
     font-style: italic;
-    color: var(--text-dim);
-    margin-top: 8px;
+    color: var(--text-mid);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .stat-quote {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--gold);
+    opacity: 0.8;
+    margin-top: 16px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 14px;
   }
 
   /* ── General comparison bars ── */
@@ -195,46 +215,286 @@
     font-family: 'Cinzel', serif;
     font-size: 12px;
     letter-spacing: 1px;
-    color: var(--text-mid);
+    color: var(--cream);
     text-align: right;
     padding-right: 8px;
   }
-  .general-name.napoleon { color: var(--gold-bright); }
+  .general-name.napoleon { color: var(--gold); }
 
   .bar-track {
     height: 28px;
     background: var(--ink-light);
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.04);
     position: relative;
     overflow: hidden;
   }
 
   .bar-fill {
     height: 100%;
-    background: var(--steel-bright);
+    background: var(--steel);
     transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
   }
   .bar-fill.napoleon-bar {
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
-    box-shadow: 2px 0 12px rgba(232,192,96,0.3);
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
   }
   .bar-fill::after {
     content: '';
     position: absolute;
     top: 0; right: 0;
     width: 2px; height: 100%;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.3);
   }
 
   .bar-value {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: var(--text-mid);
+    color: var(--text-dim);
     text-align: right;
     white-space: nowrap;
   }
-  .bar-value.napoleon-val { color: var(--gold-bright); }
+  .bar-value.napoleon-val { color: var(--gold); }
+
+  /* ── Section notes ── */
+  .section-note {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text-mid);
+    margin-bottom: 28px;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  /* ── Underdog grid ── */
+  .underdog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .underdog-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    padding: 20px 18px;
+    position: relative;
+  }
+
+  .underdog-card.napoleon-card {
+    border-color: rgba(232,192,96,0.5);
+    box-shadow: 0 0 20px rgba(232,192,96,0.06);
+  }
+
+  .underdog-gen-name {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--text-mid);
+    margin-bottom: 14px;
+  }
+  .underdog-gen-name.napoleon { color: var(--gold-bright); }
+
+  .underdog-bars { display: flex; flex-direction: column; gap: 10px; }
+  .underdog-row  { display: flex; flex-direction: column; gap: 4px; }
+
+  .underdog-row-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .underdog-bar-track {
+    height: 16px;
+    background: var(--ink-light);
+    border: 1px solid rgba(255,255,255,0.04);
+    overflow: hidden;
+  }
+
+  .underdog-bar-fill {
+    height: 100%;
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .underdog-bar-fill.favored           { background: linear-gradient(90deg, #556070, #7A8FA8); }
+  .underdog-bar-fill.underdog          { background: linear-gradient(90deg, #5B3030, #C06060); opacity: 0.85; }
+  .underdog-bar-fill.favored.napoleon  { background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright)); }
+  .underdog-bar-fill.underdog.napoleon { background: linear-gradient(90deg, #907020, #D4A840); opacity: 0.75; }
+
+  /* ── Cluster comparison grid ── */
+  .cluster-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .cluster-comp-card {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    padding: 20px 18px;
+  }
+
+  .cluster-comp-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .cluster-comp-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 44px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .cluster-comp-name {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+    color: var(--text-mid);
+    text-align: right;
+    padding-right: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cluster-comp-name.napoleon { color: var(--gold-bright); }
+
+  .cluster-comp-track {
+    height: 14px;
+    background: var(--ink-light);
+    overflow: hidden;
+  }
+
+  .cluster-comp-fill {
+    height: 100%;
+    background: var(--steel-bright);
+    transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cluster-comp-fill.napoleon { background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright)); }
+
+  .cluster-comp-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    text-align: right;
+  }
+  .cluster-comp-val.napoleon { color: var(--gold-bright); }
+
+  /* ── ACH chart ── */
+  .ach-chart-container {
+    background: var(--ink-mid);
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+
+  /* ── Bayesian stacked bar styles ── */
+  .bar-track-tall {
+    height: 36px;
+  }
+
+  .bar-raw {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: #3A4050;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bar-raw.napoleon-raw {
+    background: var(--gold-dim);
+    opacity: 0.45;
+  }
+
+  .bar-bayes {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: var(--steel);
+    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+  }
+  .bar-bayes.napoleon-bar {
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+  }
+
+  .bar-ci-band {
+    position: absolute;
+    top: 60%;
+    height: 6px;
+    background: rgba(255,255,255,0.12);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .bar-ci-tick {
+    position: absolute;
+    top: 20%;
+    width: 1.5px;
+    height: 60%;
+    background: rgba(255,255,255,0.4);
+    z-index: 3;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .bar-bayes-marker {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255,255,255,0.5);
+    z-index: 4;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .bar-value-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .bar-raw-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .shrink-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: #C06060;
+    margin-left: 4px;
+  }
+  .shrink-label.stable { color: #60A060; }
+
+  .battle-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--text-dim);
+    margin-left: 6px;
+    letter-spacing: 1px;
+  }
+
+  .bayes-note {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    max-width: 780px;
+    line-height: 1.7;
+    padding: 12px 16px;
+    border-left: 2px solid var(--border);
+    background: rgba(201,168,76,0.03);
+  }
 
   /* ── Comparison metric tabs ── */
   .metric-tabs {
@@ -263,7 +523,7 @@
   }
 
   .metric-tab:hover { color: var(--cream); }
-  .metric-tab.active { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+  .metric-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
 
   .metric-panel { display: none; }
   .metric-panel.active { display: block; }
@@ -280,11 +540,51 @@
     border: 1px solid var(--border);
     padding: 28px;
     position: relative;
-    transition: border-color 0.3s, box-shadow 0.3s;
   }
-  .matchup-card:hover {
-    border-color: var(--border-bright);
-    box-shadow: 0 0 24px rgba(232,192,96,0.07);
+
+  .matchup-card.featured {
+    border-color: rgba(232,192,96,0.7);
+    background: linear-gradient(160deg, #1e1a0e, #1A1510);
+    box-shadow: 0 0 40px rgba(232,192,96,0.1), inset 0 0 40px rgba(232,192,96,0.03);
+    padding: 32px;
+  }
+
+  .matchup-card.featured-secondary {
+    border-color: rgba(120,168,120,0.5);
+    background: linear-gradient(160deg, #111a11, #1A1510);
+    box-shadow: 0 0 24px rgba(120,168,120,0.07);
+    padding: 32px;
+  }
+
+  .matchup-callout {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    border: 1px solid rgba(232,192,96,0.3);
+    background: rgba(232,192,96,0.06);
+    line-height: 1.5;
+  }
+
+  .matchup-callout.civil-war {
+    color: #78A878;
+    border-color: rgba(120,168,120,0.3);
+    background: rgba(120,168,120,0.05);
+  }
+
+  .matchup-callout-sub {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--text-mid);
+    text-align: center;
+    margin-bottom: 24px;
+    line-height: 1.6;
   }
 
   .matchup-header {
@@ -300,13 +600,13 @@
     letter-spacing: 1px;
   }
 
-  .matchup-gen.a { color: var(--gold-bright); }
-  .matchup-gen.b { color: var(--blue-bright); text-align: right; }
+  .matchup-gen.a { color: var(--gold); }
+  .matchup-gen.b { color: #5B8DB8; text-align: right; }
 
   .vs-badge {
     font-family: 'Cinzel', serif;
     font-size: 10px;
-    color: var(--text-mid);
+    color: var(--text-dim);
     letter-spacing: 2px;
     border: 1px solid var(--border);
     padding: 4px 8px;
@@ -319,7 +619,7 @@
     font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--text-mid);
+    color: var(--text-dim);
     margin-bottom: 8px;
   }
 
@@ -332,7 +632,7 @@
   }
 
   .h2h-seg-a {
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -345,18 +645,18 @@
 
   .h2h-seg-draw {
     background: var(--ink-light);
-    border-left: 1px solid rgba(255,255,255,0.1);
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    color: var(--text-mid);
+    color: var(--text-dim);
   }
 
   .h2h-seg-b {
-    background: linear-gradient(90deg, #2C5F8A, var(--blue-bright));
+    background: linear-gradient(90deg, #2C5F8A, #5B8DB8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -395,7 +695,7 @@
     font-family: 'Cinzel', serif;
     font-size: 10px;
     letter-spacing: 1px;
-    color: var(--text-mid);
+    color: var(--cream);
     margin-bottom: 16px;
     line-height: 1.4;
     position: relative;
@@ -406,11 +706,10 @@
     font-family: 'Cinzel', serif;
     font-size: 32px;
     font-weight: 700;
-    color: var(--gold-bright);
+    color: var(--gold);
     line-height: 1;
     position: relative;
     z-index: 1;
-    text-shadow: 0 0 30px rgba(232,192,96,0.35);
   }
 
   .cluster-win {
@@ -447,7 +746,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 2px;
-    color: var(--text-mid);
+    color: var(--text-dim);
     text-transform: uppercase;
   }
 
@@ -484,6 +783,7 @@
     <div class="eyebrow">CDB90 Historical Battle Database · 660 Engagements · 1600–1973</div>
     <h1>NAPOLÉON <span>I</span></h1>
     <div class="subtitle">A statistical analysis of military genius across history's greatest commanders</div>
+    <div class="napoleon-quote">"The greatest general is he who makes the fewest mistakes."</div>
   </header>
 
   <!-- ── Key stats ── -->
@@ -492,22 +792,26 @@
     <div class="stat-card">
       <div class="stat-value">25</div>
       <div class="stat-label">Battles Recorded</div>
-      <div class="stat-context">Most in dataset</div>
+      <div class="stat-context">Excludes smaller informally documented engagements</div>
+      <div class="stat-quote">"I have fought sixty battles, and I have learned nothing that I did not know from the first."</div>
     </div>
     <div class="stat-card">
       <div class="stat-value">80%</div>
       <div class="stat-label">Win Rate</div>
       <div class="stat-context">20 victories</div>
+      <div class="stat-quote">"Soldiers generally win battles; generals get credit for them."</div>
     </div>
     <div class="stat-card">
       <div class="stat-value">6.92</div>
       <div class="stat-label">Avg Achievement</div>
       <div class="stat-context">Scale of 0–10</div>
+      <div class="stat-quote">"Ability is nothing without opportunity."</div>
     </div>
     <div class="stat-card">
       <div class="stat-value">12%</div>
       <div class="stat-label">As Underdog</div>
       <div class="stat-context">Lowest in peer group</div>
+      <div class="stat-quote">"A battle is won by the army that has the most will to conquer."</div>
     </div>
   </div>
 
@@ -516,11 +820,18 @@
     <div class="section-title">Peer Comparison</div>
 
     <div class="metric-tabs">
-      <button class="metric-tab active" onclick="switchTab(this, 'winrate')">Win Rate</button>
+      <button class="metric-tab active" onclick="switchTab(this, 'winrate')">Win Rate · Bayesian</button>
       <button class="metric-tab" onclick="switchTab(this, 'ach')">Achievement</button>
       <button class="metric-tab" onclick="switchTab(this, 'intensity')">Casualty Intensity</button>
       <button class="metric-tab" onclick="switchTab(this, 'underdog')">Underdog Rate</button>
     </div>
+
+    <p id="bayes-note" class="bayes-note">
+      Raw win rate (dim bar) vs Bayesian-adjusted estimate (bright bar), sorted by Bayesian estimate.
+      Adjustment uses a Beta(3.25, 1.75) prior — equivalent to ~5 battles at 65%.
+      Generals with few battles are pulled toward the prior mean. Napoleon barely moves (n=25).
+      Wellington drops from 100% to 84% (n=6). Error band shows 95% credible interval.
+    </p>
 
     <!-- Win Rate -->
     <div id="tab-winrate" class="metric-panel active">
@@ -557,6 +868,31 @@
     <div class="matchup-grid" id="matchup-grid"></div>
   </section>
 
+  <div class="ornamental-divider">✦ ✦ ✦</div>
+
+  <!-- ── Underdog analysis ── -->
+  <section class="animate-in delay-4">
+    <div class="section-title">Win Rate — Favored vs Underdog</div>
+    <p class="section-note">Force ratio below 1.0 = attacker had fewer troops than defender at battle start. Napoleon fought as underdog in only 5 of 25 battles — small sample, but the favored rate of 85% is the real story.</p>
+    <div class="underdog-grid" id="underdog-grid"></div>
+  </section>
+
+  <!-- ── Cluster win rate vs peers ── -->
+  <section class="animate-in delay-4">
+    <div class="section-title">Napoleon vs Peers — By Battle Type</div>
+    <p class="section-note">Win rates within each cluster type Napoleon actually fought in. Takes era and army size out of the equation — comparing like for like.</p>
+    <div class="cluster-comparison-grid" id="cluster-comparison-grid"></div>
+  </section>
+
+  <!-- ── ACH distribution ── -->
+  <section class="animate-in delay-5">
+    <div class="section-title">Achievement Score Distribution</div>
+    <p class="section-note">A flat win rate average hides how decisively a general won. Napoleon stacks 7s, 8s, and 9s. Most peers cluster at 5–6. Scores of 6+ = clear victory. Scores of 0–5 = stalemate or defeat.</p>
+    <div class="ach-chart-container">
+      <canvas id="ach-chart" height="320"></canvas>
+    </div>
+  </section>
+
   <!-- ── Footer ── -->
   <footer class="animate-in delay-5">
     <div class="footer-text">Source: CDB90 Battle Database</div>
@@ -569,15 +905,15 @@
 <script>
 // ── Data ──────────────────────────────────────────────────────────────────────
 const generals = [
-  { name: 'NAPOLEON I',      winRate: 80.0, ach: 6.92, intensity: 0.2028, underdog: 12.0, battles: 25, isNapoleon: true },
-  { name: 'WELLINGTON',      winRate:100.0, ach: 7.00, intensity: 0.1300, underdog: 33.3, battles: 6  },
-  { name: 'TURENNE',         winRate: 83.3, ach: 7.17, intensity: 0.2142, underdog: 16.7, battles: 6  },
-  { name: 'JACKSON',         winRate: 83.3, ach: 7.17, intensity: 0.1388, underdog: 33.3, battles: 6  },
-  { name: 'FREDERICK II',    winRate: 78.6, ach: 7.43, intensity: 0.2304, underdog: 28.6, battles: 14 },
-  { name: 'GRANT',           winRate: 62.5, ach: 6.12, intensity: 0.1445, underdog: 37.5, battles: 8  },
-  { name: 'WASHINGTON',      winRate: 60.0, ach: 6.40, intensity: 0.0856, underdog:  0.0, battles: 5  },
-  { name: 'LEE',             winRate: 50.0, ach: 6.33, intensity: 0.1453, underdog:  0.0, battles: 12 },
-  { name: 'ARCHDUKE CHARLES',winRate: 42.9, ach: 5.29, intensity: 0.1436, underdog: 14.3, battles: 7  },
+  { name: 'NAPOLEON I',       winRate: 80.0, bayesWr: 77.5, ciLo: 61.2, ciHi: 90.3, ach: 6.92, intensity: 0.2028, underdog: 12.0, battles: 25, isNapoleon: true  },
+  { name: 'WELLINGTON',       winRate:100.0, bayesWr: 84.1, ciLo: 58.6, ciHi: 98.3, ach: 7.00, intensity: 0.1300, underdog: 33.3, battles: 6  },
+  { name: 'TURENNE',          winRate: 83.3, bayesWr: 75.0, ciLo: 47.0, ciHi: 94.5, ach: 7.17, intensity: 0.2142, underdog: 16.7, battles: 6  },
+  { name: 'JACKSON',          winRate: 83.3, bayesWr: 75.0, ciLo: 47.0, ciHi: 94.5, ach: 7.17, intensity: 0.1388, underdog: 33.3, battles: 6  },
+  { name: 'FREDERICK II',     winRate: 78.6, bayesWr: 75.0, ciLo: 53.9, ciHi: 91.2, ach: 7.43, intensity: 0.2304, underdog: 28.6, battles: 14 },
+  { name: 'GRANT',            winRate: 62.5, bayesWr: 63.5, ciLo: 36.8, ciHi: 86.2, ach: 6.12, intensity: 0.1445, underdog: 37.5, battles: 8  },
+  { name: 'WASHINGTON',       winRate: 60.0, bayesWr: 62.5, ciLo: 32.3, ciHi: 88.0, ach: 6.40, intensity: 0.0856, underdog:  0.0, battles: 5  },
+  { name: 'LEE',              winRate: 50.0, bayesWr: 54.4, ciLo: 31.2, ciHi: 76.6, ach: 6.33, intensity: 0.1453, underdog:  0.0, battles: 12 },
+  { name: 'ARCHDUKE CHARLES', winRate: 42.9, bayesWr: 52.1, ciLo: 25.2, ciHi: 78.4, ach: 5.29, intensity: 0.1436, underdog: 14.3, battles: 7  },
 ];
 
 const clusters = [
@@ -625,28 +961,76 @@ const matchups = [
 
 // ── Render bars ───────────────────────────────────────────────────────────────
 function renderBars(containerId, metric, maxVal, fmt) {
-  const sorted = [...generals].sort((a, b) => b[metric] - a[metric]);
-  const container = document.getElementById(containerId);
+  const isWinRate  = metric === 'winRate';
+  const sortKey    = isWinRate ? 'bayesWr' : metric;
+  const sorted     = [...generals].sort((a, b) => b[sortKey] - a[sortKey]);
+  const container  = document.getElementById(containerId);
   container.innerHTML = '';
 
   sorted.forEach((g, i) => {
-    const pct = (g[metric] / maxVal) * 100;
     const row = document.createElement('div');
     row.className = 'general-row';
     row.style.animationDelay = `${i * 0.05}s`;
-    row.innerHTML = `
-      <div class="general-name ${g.isNapoleon ? 'napoleon' : ''}">${g.name}</div>
-      <div class="bar-track">
-        <div class="bar-fill ${g.isNapoleon ? 'napoleon-bar' : ''}" style="width:0%" data-target="${pct}"></div>
-      </div>
-      <div class="bar-value ${g.isNapoleon ? 'napoleon-val' : ''}">${fmt(g[metric])}</div>
-    `;
+
+    if (isWinRate) {
+      // Stacked bar: raw win rate segment + Bayesian overlay marker + CI band
+      const rawPct   = g.winRate;                          // already 0-100
+      const bayesPct = g.bayesWr;
+      const ciLoPct  = g.ciLo;
+      const ciHiPct  = g.ciHi;
+      const shrinkage = (g.winRate - g.bayesWr).toFixed(1);
+      const shrinkLabel = shrinkage > 0
+        ? `<span class="shrink-label">▼${shrinkage}%</span>`
+        : `<span class="shrink-label stable">▲${Math.abs(shrinkage)}%</span>`;
+
+      row.innerHTML = `
+        <div class="general-name ${g.isNapoleon ? 'napoleon' : ''}">
+          ${g.name}
+          <span class="battle-count">n=${g.battles}</span>
+        </div>
+        <div class="bar-track bar-track-tall">
+          <!-- Raw win rate (dimmer, full width) -->
+          <div class="bar-raw ${g.isNapoleon ? 'napoleon-raw' : ''}"
+               style="width:0%" data-target="${rawPct}"></div>
+          <!-- Bayesian win rate (brighter, on top) -->
+          <div class="bar-bayes ${g.isNapoleon ? 'napoleon-bar' : ''}"
+               style="width:0%" data-target="${bayesPct}"></div>
+          <!-- CI band -->
+          <div class="bar-ci-band"
+               style="left:${ciLoPct}%;width:${ciHiPct - ciLoPct}%"></div>
+          <!-- CI ticks -->
+          <div class="bar-ci-tick" style="left:${ciLoPct}%"></div>
+          <div class="bar-ci-tick" style="left:${ciHiPct}%"></div>
+          <!-- Bayes marker line -->
+          <div class="bar-bayes-marker" style="left:${bayesPct}%"></div>
+        </div>
+        <div class="bar-value-stack">
+          <div class="bar-value ${g.isNapoleon ? 'napoleon-val' : ''}">
+            ${g.bayesWr.toFixed(1)}% ${shrinkLabel}
+          </div>
+          <div class="bar-raw-label">raw: ${g.winRate.toFixed(0)}%</div>
+        </div>
+      `;
+    } else {
+      const pct = (g[metric] / maxVal) * 100;
+      row.innerHTML = `
+        <div class="general-name ${g.isNapoleon ? 'napoleon' : ''}">
+          ${g.name}
+          <span class="battle-count">n=${g.battles}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill ${g.isNapoleon ? 'napoleon-bar' : ''}"
+               style="width:0%" data-target="${pct}"></div>
+        </div>
+        <div class="bar-value ${g.isNapoleon ? 'napoleon-val' : ''}">${fmt(g[metric])}</div>
+      `;
+    }
+
     container.appendChild(row);
   });
 
-  // Animate bars after small delay
   setTimeout(() => {
-    container.querySelectorAll('.bar-fill').forEach(el => {
+    container.querySelectorAll('[data-target]').forEach(el => {
       el.style.width = el.dataset.target + '%';
     });
   }, 100);
@@ -658,6 +1042,8 @@ function switchTab(btn, metric) {
   btn.classList.add('active');
   document.getElementById('tab-' + metric).classList.add('active');
   renderCurrentTab(metric);
+  const note = document.getElementById('bayes-note');
+  if (note) note.style.display = metric === 'winrate' ? 'block' : 'none';
 }
 
 function renderCurrentTab(metric) {
@@ -701,10 +1087,36 @@ function renderMatchups() {
   const grid = document.getElementById('matchup-grid');
   matchups.forEach(m => {
     const card = document.createElement('div');
-    card.className = 'matchup-card';
 
-    const isNapA = m.a === 'NAPOLEON I';
-    const isNapB = m.b === 'NAPOLEON I';
+    const isWellington = m.a === 'NAPOLEON I' && m.b === 'WELLINGTON';
+    const isCivilWar   = (m.a === 'GRANT' && m.b === 'LEE') || (m.a === 'LEE' && m.b === 'GRANT');
+
+    if (isWellington) card.className = 'matchup-card featured';
+    else if (isCivilWar) card.className = 'matchup-card featured-secondary';
+    else card.className = 'matchup-card';
+
+    let calloutHTML = '';
+    if (isWellington) {
+      calloutHTML = `
+        <div class="matchup-callout">
+          48.6% — Napoleon's odds of avoiding exile at Waterloo
+        </div>
+        <div class="matchup-callout-sub">
+          Waterloo was a Massive Set-Piece — Napoleon's weakest cluster at 67% win rate.
+          He faced Wellington, who the simulation favors head-to-head, with a degraded 1815 army.
+          The model doesn't know that. It's running off career averages.
+        </div>
+      `;
+    } else if (isCivilWar) {
+      calloutHTML = `
+        <div class="matchup-callout civil-war">
+          The War Between the Generals — Grant edges Lee 60% to 40%
+        </div>
+        <div class="matchup-callout-sub">
+          Lee never fought outnumbered. Grant did — 37.5% of the time — and still won nearly two-thirds of his battles.
+        </div>
+      `;
+    }
 
     let contextsHTML = m.contexts.map(c => `
       <div class="h2h-bar-container">
@@ -718,6 +1130,7 @@ function renderMatchups() {
     `).join('');
 
     card.innerHTML = `
+      ${calloutHTML}
       <div class="matchup-header">
         <div class="matchup-gen a">${m.a}</div>
         <div class="vs-badge">VS</div>
@@ -733,6 +1146,271 @@ function renderMatchups() {
 renderCurrentTab('winrate');
 renderClusters();
 renderMatchups();
+
+// ── Underdog data ─────────────────────────────────────────────────────────────
+const underdogData = [
+  { name: 'NAPOLEON I',       fav: 85, favN: 20, dog: 60,  dogN: 5,  isNapoleon: true  },
+  { name: 'WELLINGTON',       fav:100, favN:  4, dog:100,  dogN: 2,  isNapoleon: false },
+  { name: 'TURENNE',          fav:100, favN:  4, dog: 50,  dogN: 2,  isNapoleon: false },
+  { name: 'JACKSON',          fav:100, favN:  4, dog: 50,  dogN: 2,  isNapoleon: false },
+  { name: 'FREDERICK II',     fav: 80, favN:  5, dog: 78,  dogN: 9,  isNapoleon: false },
+  { name: 'GRANT',            fav: 40, favN:  5, dog:100,  dogN: 3,  isNapoleon: false },
+  { name: 'WASHINGTON',       fav: 60, favN:  5, dog: null,dogN: 0,  isNapoleon: false },
+  { name: 'LEE',              fav: 55, favN: 11, dog:  0,  dogN: 1,  isNapoleon: false },
+  { name: 'ARCHDUKE CHARLES', fav: 40, favN:  5, dog: 50,  dogN: 2,  isNapoleon: false },
+];
+
+const clusterCompData = {
+  0: { name: 'Large-Scale Attritional', generals: [
+    { name: 'NAPOLEON I',       wr: 83, n: 12, isNapoleon: true  },
+    { name: 'WELLINGTON',       wr:100, n:  5, isNapoleon: false },
+    { name: 'FREDERICK II',     wr: 86, n:  7, isNapoleon: false },
+    { name: 'LEE',              wr: 56, n:  9, isNapoleon: false },
+    { name: 'GRANT',            wr: 57, n:  7, isNapoleon: false },
+    { name: 'ARCHDUKE CHARLES', wr: 50, n:  4, isNapoleon: false },
+  ]},
+  1: { name: 'High-Intensity Defensive', generals: [
+    { name: 'NAPOLEON I',   wr: 75, n: 4, isNapoleon: true  },
+    { name: 'WELLINGTON',   wr:100, n: 1, isNapoleon: false },
+    { name: 'FREDERICK II', wr: 60, n: 5, isNapoleon: false },
+    { name: 'JACKSON',      wr: 67, n: 3, isNapoleon: false },
+    { name: 'GRANT',        wr:100, n: 1, isNapoleon: false },
+    { name: 'TURENNE',      wr:100, n: 2, isNapoleon: false },
+  ]},
+  2: { name: 'Decisive Pursuit', generals: [
+    { name: 'NAPOLEON I', wr:100, n: 1, isNapoleon: true  },
+    { name: 'JACKSON',    wr:100, n: 2, isNapoleon: false },
+  ]},
+  4: { name: 'High-Intensity Offensive', generals: [
+    { name: 'NAPOLEON I',   wr:100, n: 1, isNapoleon: true  },
+    { name: 'FREDERICK II', wr:100, n: 1, isNapoleon: false },
+    { name: 'TURENNE',      wr: 67, n: 3, isNapoleon: false },
+    { name: 'WASHINGTON',   wr:100, n: 1, isNapoleon: false },
+  ]},
+  5: { name: 'Massive Set-Piece', generals: [
+    { name: 'NAPOLEON I',       wr: 67, n: 6, isNapoleon: true  },
+    { name: 'ARCHDUKE CHARLES', wr: 50, n: 2, isNapoleon: false },
+    { name: 'LEE',              wr: 50, n: 2, isNapoleon: false },
+    { name: 'FREDERICK II',     wr:100, n: 1, isNapoleon: false },
+  ]},
+  6: { name: 'Failed Assault', generals: [
+    { name: 'NAPOLEON I',       wr:100, n: 1, isNapoleon: true  },
+    { name: 'JACKSON',          wr:100, n: 1, isNapoleon: false },
+    { name: 'LEE',              wr:  0, n: 1, isNapoleon: false },
+    { name: 'ARCHDUKE CHARLES', wr:  0, n: 1, isNapoleon: false },
+    { name: 'WASHINGTON',       wr:  0, n: 1, isNapoleon: false },
+  ]},
+};
+
+const achData = {
+  'NAPOLEON I':       { 3:1, 4:2, 5:2, 6:4, 7:6, 8:5, 9:4, 10:1 },
+  'FREDERICK II':     { 3:1, 4:1, 5:1, 6:0, 7:2, 8:4, 9:4, 10:1 },
+  'WELLINGTON':       { 3:0, 4:0, 5:0, 6:2, 7:2, 8:2, 9:0, 10:0 },
+  'TURENNE':          { 3:1, 4:0, 5:0, 6:1, 7:0, 8:2, 9:2, 10:0 },
+  'JACKSON':          { 3:0, 4:1, 5:0, 6:1, 7:0, 8:3, 9:1, 10:0 },
+  'LEE':              { 3:0, 4:2, 5:4, 6:1, 7:2, 8:0, 9:2, 10:1 },
+  'GRANT':            { 3:0, 4:1, 5:2, 6:2, 7:1, 8:2, 9:0, 10:0 },
+  'WASHINGTON':       { 3:0, 4:1, 5:1, 6:1, 7:0, 8:1, 9:1, 10:0 },
+  'ARCHDUKE CHARLES': { 3:0, 4:3, 5:1, 6:1, 7:2, 8:0, 9:0, 10:0 },
+};
+
+// ── Render underdog grid ──────────────────────────────────────────────────────
+function renderUnderdogGrid() {
+  const grid = document.getElementById('underdog-grid');
+  underdogData.forEach(g => {
+    const card = document.createElement('div');
+    card.className = `underdog-card${g.isNapoleon ? ' napoleon-card' : ''}`;
+
+    const dogLabel = g.dog === null
+      ? '<span style="color:var(--text-dim);font-style:italic">no data</span>'
+      : `${g.dog}% <span style="color:var(--text-dim)">(n=${g.dogN})</span>`;
+
+    card.innerHTML = `
+      <div class="underdog-gen-name ${g.isNapoleon ? 'napoleon' : ''}">${g.name}</div>
+      <div class="underdog-bars">
+        <div class="underdog-row">
+          <div class="underdog-row-label">
+            <span>Favored</span>
+            <span style="color:${g.isNapoleon ? 'var(--gold-bright)' : 'var(--text-mid)'}">${g.fav}% (n=${g.favN})</span>
+          </div>
+          <div class="underdog-bar-track">
+            <div class="underdog-bar-fill favored${g.isNapoleon ? ' napoleon' : ''}"
+                 style="width:0%" data-target="${g.fav}"></div>
+          </div>
+        </div>
+        ${g.dog !== null ? `
+        <div class="underdog-row">
+          <div class="underdog-row-label">
+            <span>Underdog</span>
+            <span>${dogLabel}</span>
+          </div>
+          <div class="underdog-bar-track">
+            <div class="underdog-bar-fill underdog${g.isNapoleon ? ' napoleon' : ''}"
+                 style="width:0%" data-target="${g.dog}"></div>
+          </div>
+        </div>` : `
+        <div class="underdog-row">
+          <div class="underdog-row-label"><span>Underdog</span><span style="color:var(--text-dim)">0 battles</span></div>
+          <div class="underdog-bar-track"><div class="underdog-bar-fill underdog" style="width:0%"></div></div>
+        </div>`}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  setTimeout(() => {
+    grid.querySelectorAll('.underdog-bar-fill').forEach(el => {
+      el.style.width = (el.dataset.target || 0) + '%';
+    });
+  }, 200);
+}
+
+// ── Render cluster comparison grid ───────────────────────────────────────────
+function renderClusterComparison() {
+  const grid = document.getElementById('cluster-comparison-grid');
+  Object.entries(clusterCompData).forEach(([clusterId, data]) => {
+    const card = document.createElement('div');
+    card.className = 'cluster-comp-card';
+    const sorted = [...data.generals].sort((a, b) => b.wr - a.wr);
+    const rowsHTML = sorted.map(g => `
+      <div class="cluster-comp-row">
+        <div class="cluster-comp-name ${g.isNapoleon ? 'napoleon' : ''}">${g.name}</div>
+        <div class="cluster-comp-track">
+          <div class="cluster-comp-fill ${g.isNapoleon ? 'napoleon' : ''}"
+               style="width:0%" data-target="${g.wr}"></div>
+        </div>
+        <div class="cluster-comp-val ${g.isNapoleon ? 'napoleon' : ''}">${g.wr}%</div>
+      </div>
+    `).join('');
+    card.innerHTML = `<div class="cluster-comp-title">${data.name}</div>${rowsHTML}`;
+    grid.appendChild(card);
+  });
+
+  setTimeout(() => {
+    grid.querySelectorAll('.cluster-comp-fill').forEach(el => {
+      el.style.width = (el.dataset.target || 0) + '%';
+    });
+  }, 200);
+}
+
+// ── Render ACH distribution chart ────────────────────────────────────────────
+function renderAchChart() {
+  const canvas    = document.getElementById('ach-chart');
+  const container = canvas.parentElement;
+  const ctx       = canvas.getContext('2d');
+  const scores    = [3, 4, 5, 6, 7, 8, 9, 10];
+  const genList   = Object.keys(achData);
+
+  const achPct = {};
+  genList.forEach(g => {
+    const total = Object.values(achData[g]).reduce((a, b) => a + b, 0);
+    achPct[g] = {};
+    scores.forEach(s => { achPct[g][s] = (achData[g][s] || 0) / total * 100; });
+  });
+
+  const padding  = { top: 28, right: 20, bottom: 20, left: 48 };
+  const CHART_H  = 240;
+  const LEGEND_H = 60;
+  const W        = (container ? container.clientWidth - 56 : 0) || 860;
+  const H        = padding.top + CHART_H + padding.bottom + LEGEND_H;
+  const chartW   = W - padding.left - padding.right;
+  const maxVal   = 32;
+  const barW     = 0.8 / genList.length;
+  const groupW   = chartW / scores.length;
+
+  canvas.width        = W;
+  canvas.height       = H;
+  canvas.style.width  = '100%';
+  canvas.style.height = H + 'px';
+
+  const COLORS = {
+    'NAPOLEON I':       '#E8C060',
+    'FREDERICK II':     '#7A8FA8',
+    'WELLINGTON':       '#6AADAD',
+    'TURENNE':          '#9A7CC0',
+    'JACKSON':          '#C07878',
+    'LEE':              '#78A878',
+    'GRANT':            '#C0A060',
+    'WASHINGTON':       '#8AA8C0',
+    'ARCHDUKE CHARLES': '#A89078',
+  };
+
+  // Background
+  ctx.fillStyle = '#1A1510';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.lineWidth = 1;
+  [0, 10, 20, 30].forEach(v => {
+    const y = padding.top + CHART_H - (v / maxVal) * CHART_H;
+    ctx.strokeStyle = '#2A2218';
+    ctx.beginPath();
+    ctx.moveTo(padding.left, y);
+    ctx.lineTo(padding.left + chartW, y);
+    ctx.stroke();
+    ctx.fillStyle = '#9A8B72';
+    ctx.font      = '10px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(v + '%', padding.left - 6, y + 4);
+  });
+
+  // Stalemate threshold at ACH 5
+  const staleIdx = scores.indexOf(5);
+  const threshX  = padding.left + staleIdx * groupW + groupW * 0.5;
+  ctx.strokeStyle = '#9A8B72';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(threshX, padding.top);
+  ctx.lineTo(threshX, padding.top + CHART_H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#9A8B72';
+  ctx.font      = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('← defeat / stalemate  |  victory →', threshX, padding.top - 8);
+
+  // Bars + x labels
+  scores.forEach((s, si) => {
+    const gx = padding.left + si * groupW;
+    genList.forEach((g, gi) => {
+      const val = achPct[g][s] || 0;
+      const bh  = (val / maxVal) * CHART_H;
+      const x   = gx + (gi - genList.length / 2 + 0.5) * barW * groupW + groupW * 0.5;
+      const y   = padding.top + CHART_H - bh;
+      const bw  = barW * groupW * 0.85;
+      ctx.globalAlpha = g === 'NAPOLEON I' ? 1.0 : 0.45;
+      ctx.fillStyle   = COLORS[g];
+      ctx.fillRect(x - bw / 2, y, bw, bh);
+    });
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = '#9A8B72';
+    ctx.font      = '10px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`ACH ${s}`, gx + groupW / 2, padding.top + CHART_H + 14);
+  });
+
+  // Legend — 2 rows of 5 across
+  const legendTop = padding.top + CHART_H + padding.bottom + 18;
+  const colW      = Math.floor(chartW / 5);
+  genList.forEach((g, i) => {
+    const col = i % 5;
+    const row = Math.floor(i / 5);
+    const lx  = padding.left + col * colW;
+    const ly  = legendTop + row * 22;
+    ctx.fillStyle   = COLORS[g];
+    ctx.globalAlpha = g === 'NAPOLEON I' ? 1.0 : 0.7;
+    ctx.fillRect(lx, ly, 10, 10);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle   = g === 'NAPOLEON I' ? '#E8C060' : '#9A8B72';
+    ctx.font        = g === 'NAPOLEON I' ? 'bold 9px monospace' : '9px monospace';
+    ctx.textAlign   = 'left';
+    ctx.fillText(g, lx + 14, ly + 9);
+  });
+}
+
+renderUnderdogGrid();
+renderClusterComparison();
+renderAchChart();
 </script>
 </body>
 </html>
