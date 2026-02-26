@@ -7,17 +7,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold:     #C9A84C;
-    --gold-dim: #8B6914;
-    --red:      #8B1A1A;
-    --red-bright: #C0392B;
-    --cream:    #F2E8D5;
-    --ink:      #0E0B07;
-    --ink-mid:  #1A1510;
-    --ink-light:#2A2218;
-    --steel:    #4A5568;
-    --text-dim: #8B7D6B;
-    --border:   rgba(201,168,76,0.2);
+    --gold:        #E8C060;
+    --gold-dim:    #A07820;
+    --gold-bright: #FFD980;
+    --red:         #8B1A1A;
+    --red-bright:  #E04040;
+    --blue:        #5B8DB8;
+    --blue-bright: #7BAFDC;
+    --cream:       #F5EDD8;
+    --ink:         #0A0804;
+    --ink-mid:     #161208;
+    --ink-light:   #221C10;
+    --steel:       #556070;
+    --steel-bright:#7A8FA8;
+    --text-dim:    #9A8B72;
+    --text-mid:    #C4B090;
+    --border:      rgba(232,192,96,0.25);
+    --border-bright:rgba(232,192,96,0.5);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -87,7 +93,7 @@
     margin-top: 16px;
     font-size: 18px;
     font-style: italic;
-    color: var(--text-dim);
+    color: var(--text-mid);
     letter-spacing: 0.5px;
   }
 
@@ -127,17 +133,20 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
   }
 
-  .stat-card:hover { border-color: var(--gold); }
+  .stat-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(232,192,96,0.1), inset 0 0 30px rgba(232,192,96,0.03);
+  }
 
   .stat-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -147,9 +156,10 @@
     font-family: 'Cinzel', serif;
     font-size: 48px;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--gold-bright);
     line-height: 1;
     margin-bottom: 8px;
+    text-shadow: 0 0 40px rgba(232,192,96,0.4);
   }
 
   .stat-label {
@@ -157,7 +167,7 @@
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-dim);
+    color: var(--text-mid);
   }
 
   .stat-context {
@@ -185,45 +195,46 @@
     font-family: 'Cinzel', serif;
     font-size: 12px;
     letter-spacing: 1px;
-    color: var(--cream);
+    color: var(--text-mid);
     text-align: right;
     padding-right: 8px;
   }
-  .general-name.napoleon { color: var(--gold); }
+  .general-name.napoleon { color: var(--gold-bright); }
 
   .bar-track {
     height: 28px;
     background: var(--ink-light);
-    border: 1px solid rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
     position: relative;
     overflow: hidden;
   }
 
   .bar-fill {
     height: 100%;
-    background: var(--steel);
+    background: var(--steel-bright);
     transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
   }
   .bar-fill.napoleon-bar {
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+    box-shadow: 2px 0 12px rgba(232,192,96,0.3);
   }
   .bar-fill::after {
     content: '';
     position: absolute;
     top: 0; right: 0;
     width: 2px; height: 100%;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.4);
   }
 
   .bar-value {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: var(--text-dim);
+    color: var(--text-mid);
     text-align: right;
     white-space: nowrap;
   }
-  .bar-value.napoleon-val { color: var(--gold); }
+  .bar-value.napoleon-val { color: var(--gold-bright); }
 
   /* ── Comparison metric tabs ── */
   .metric-tabs {
@@ -252,7 +263,7 @@
   }
 
   .metric-tab:hover { color: var(--cream); }
-  .metric-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .metric-tab.active { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
 
   .metric-panel { display: none; }
   .metric-panel.active { display: block; }
@@ -269,6 +280,11 @@
     border: 1px solid var(--border);
     padding: 28px;
     position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .matchup-card:hover {
+    border-color: var(--border-bright);
+    box-shadow: 0 0 24px rgba(232,192,96,0.07);
   }
 
   .matchup-header {
@@ -284,13 +300,13 @@
     letter-spacing: 1px;
   }
 
-  .matchup-gen.a { color: var(--gold); }
-  .matchup-gen.b { color: #5B8DB8; text-align: right; }
+  .matchup-gen.a { color: var(--gold-bright); }
+  .matchup-gen.b { color: var(--blue-bright); text-align: right; }
 
   .vs-badge {
     font-family: 'Cinzel', serif;
     font-size: 10px;
-    color: var(--text-dim);
+    color: var(--text-mid);
     letter-spacing: 2px;
     border: 1px solid var(--border);
     padding: 4px 8px;
@@ -303,7 +319,7 @@
     font-size: 9px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--text-dim);
+    color: var(--text-mid);
     margin-bottom: 8px;
   }
 
@@ -316,7 +332,7 @@
   }
 
   .h2h-seg-a {
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -329,18 +345,18 @@
 
   .h2h-seg-draw {
     background: var(--ink-light);
-    border-left: 1px solid rgba(255,255,255,0.08);
-    border-right: 1px solid rgba(255,255,255,0.08);
+    border-left: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid rgba(255,255,255,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    color: var(--text-dim);
+    color: var(--text-mid);
   }
 
   .h2h-seg-b {
-    background: linear-gradient(90deg, #2C5F8A, #5B8DB8);
+    background: linear-gradient(90deg, #2C5F8A, var(--blue-bright));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,7 +395,7 @@
     font-family: 'Cinzel', serif;
     font-size: 10px;
     letter-spacing: 1px;
-    color: var(--cream);
+    color: var(--text-mid);
     margin-bottom: 16px;
     line-height: 1.4;
     position: relative;
@@ -390,10 +406,11 @@
     font-family: 'Cinzel', serif;
     font-size: 32px;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--gold-bright);
     line-height: 1;
     position: relative;
     z-index: 1;
+    text-shadow: 0 0 30px rgba(232,192,96,0.35);
   }
 
   .cluster-win {
@@ -430,7 +447,7 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     letter-spacing: 2px;
-    color: var(--text-dim);
+    color: var(--text-mid);
     text-transform: uppercase;
   }
 
