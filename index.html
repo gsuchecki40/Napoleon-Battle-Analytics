@@ -255,6 +255,44 @@
   }
   .bar-value.napoleon-val { color: var(--gold); }
 
+  /* ── Info icon tooltip ── */
+  .info-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.5);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+    color: var(--gold); cursor: pointer; position: relative; flex-shrink: 0;
+    margin-left: 4px; transition: background 0.2s, border-color 0.2s;
+    letter-spacing: 0; text-transform: none;
+  }
+  .info-icon:hover, .info-icon:focus {
+    background: rgba(201,168,76,0.15); border-color: var(--gold-bright); outline: none;
+  }
+  .info-tooltip {
+    display: none; position: absolute; top: calc(100% + 14px); left: 50%;
+    transform: translateX(-50%); width: 360px;
+    background: #1e1a10; border: 1px solid rgba(201,168,76,0.4);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.7); padding: 22px 24px;
+    font-family: 'Crimson Text', Georgia, serif; font-size: 16px;
+    line-height: 1.75; color: var(--cream); text-transform: none;
+    letter-spacing: 0; font-weight: 400; z-index: 100;
+    pointer-events: none; text-align: left;
+  }
+  .info-tooltip strong {
+    display: block; font-family: 'Cinzel', serif; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-bright); margin-bottom: 12px;
+  }
+  .info-tooltip em { color: var(--text-mid); font-style: italic; }
+  .info-tooltip::before {
+    content: ''; position: absolute; top: -6px; left: 50%;
+    width: 10px; height: 10px; background: #1e1a10;
+    border-left: 1px solid rgba(201,168,76,0.4);
+    border-top: 1px solid rgba(201,168,76,0.4);
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .info-icon:hover .info-tooltip, .info-icon:focus .info-tooltip { display: block; }
+
   /* ── Section notes ── */
   .section-note {
     font-size: 14px;
@@ -864,7 +902,18 @@
 
   <!-- ── Head to head ── -->
   <section class="animate-in delay-4">
-    <div class="section-title">Monte Carlo Head-to-Head  ·  100,000 Simulations</div>
+    <div class="section-title">
+      Monte Carlo Head-to-Head · 100,000 Simulations
+      <span class="info-icon" tabindex="0">?
+        <span class="info-tooltip">
+          <strong>How does this work?</strong>
+          Every general has a personal record of battle outcomes — how decisively they won or lost each fight, scored 0–10.<br><br>
+          To simulate a matchup, we randomly draw one score from each general's career record and compare them. Whoever drew higher wins that round. We repeat this 100,000 times.<br><br>
+          The percentage of rounds each general won is their probability of winning a randomly drawn matchup.<br><br>
+          <em>Think of it like shuffling each general's career into a deck of cards and drawing one from each. Whose card is higher? Do it 100,000 times and you get a rock-solid probability.</em>
+        </span>
+      </span>
+    </div>
     <div class="matchup-grid" id="matchup-grid"></div>
   </section>
 
@@ -933,21 +982,6 @@ const matchups = [
     contexts: [
       { label: 'Large-Scale Attritional', wa: 48.6, draw: 19.8, wb: 31.6 },
       { label: 'OVERALL',                 wa: 48.6, draw:  0.0, wb: 51.4 },
-    ]
-  },
-  {
-    a: 'NAPOLEON I', b: 'LEE',
-    contexts: [
-      { label: 'Large-Scale Attritional', wa: 53.8, draw: 14.9, wb: 31.3 },
-      { label: 'Massive Set-Piece',       wa: 49.9, draw:  0.0, wb: 50.1 },
-      { label: 'OVERALL',                 wa: 52.7, draw:  0.0, wb: 47.3 },
-    ]
-  },
-  {
-    a: 'NAPOLEON I', b: 'JACKSON',
-    contexts: [
-      { label: 'High-Intensity Defensive',wa: 67.0, draw:  0.0, wb: 33.0 },
-      { label: 'OVERALL',                 wa: 67.0, draw:  0.0, wb: 33.0 },
     ]
   },
   {
